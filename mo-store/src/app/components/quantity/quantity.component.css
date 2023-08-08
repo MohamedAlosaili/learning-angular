@@ -22,11 +22,12 @@ source: https://angular.io/guide/component-styles#deprecated-deep--and-ng-deep
 
 solutions: [
   https://stackoverflow.com/a/50159982/22190679,
-
+  https://stackoverflow.com/a/36265072/22190679
 ]
 */
 
-:host >>> .quantity--btn {
+/* CSS specificity help to override the style */
+app-button > button.quantity--btn {
   height: 2rem;
   width: 2rem;
   border-radius: 10rem;

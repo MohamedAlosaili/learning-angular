@@ -1,9 +1,16 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ViewEncapsulation,
+} from '@angular/core';
 
 @Component({
   selector: 'app-quantity',
   templateUrl: 'quantity.component.html',
   styleUrls: ['quantity.component.css'],
+  encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class QuantityComponent {
   /*
