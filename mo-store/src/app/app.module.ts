@@ -20,6 +20,7 @@ import { ButtonComponent } from './components/button/button.component';
 import { CartComponent } from './cart/cart.component';
 import { CartItemComponent } from './cart/cart-item/cart-item.component';
 import { QuantityComponent } from './components/quantity/quantity.component';
+import { StorageService } from './services/storage.service';
 
 const routes: Routes = [
   {
@@ -63,7 +64,7 @@ const routes: Routes = [
     MatIconModule,
     MatProgressSpinnerModule,
   ],
-  providers: [],
+  providers: [StorageService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

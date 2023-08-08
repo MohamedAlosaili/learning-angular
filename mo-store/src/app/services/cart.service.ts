@@ -7,7 +7,6 @@ const STORAGE = 'cart-items';
 
 @Injectable({
   providedIn: 'root',
-  deps: [StorageService],
 })
 export class CartService {
   private cart = new BehaviorSubject<{ items: CartItem[] }>({
