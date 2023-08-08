@@ -1,0 +1,35 @@
+.quantity {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+.quantity--number {
+  width: 2rem;
+  text-align: center;
+}
+
+/*
+  >>> | ::ng-deep | /deep/ are deprecated.
+
+:host ::ng-deep .quantity--btn {}
+:host >>> .quantity--btn {}
+:host /deep/ .quantity--btn {}
+
+source: https://angular.io/guide/component-styles#deprecated-deep--and-ng-deep
+
+solutions: [
+  https://stackoverflow.com/a/50159982/22190679,
+
+]
+*/
+
+:host >>> .quantity--btn {
+  height: 2rem;
+  width: 2rem;
+  border-radius: 10rem;
+  padding: 0.5rem;
+  line-height: 1;
+}

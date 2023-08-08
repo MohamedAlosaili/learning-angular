@@ -1,0 +1,13 @@
+.star-container {
+  display: flex;
+}
+
+.star {
+  position: relative;
+}
+
+.filled {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}

@@ -1,0 +1,10 @@
+<div class="quantity">
+  {{ label ? "Quantity: " : "" }}
+  <app-button (click)="changeQuantity(-1)" className="quantity--btn"
+    >-</app-button
+  >
+  <p class="quantity--number">{{ quantity }}</p>
+  <app-button (click)="changeQuantity(1)" className="quantity--btn"
+    >+</app-button
+  >
+</div>

@@ -1,0 +1,26 @@
+<div class="product">
+  <div class="image">
+    <img class="product--img" [src]="product.image" [alt]="product.title" />
+  </div>
+  <div class="info">
+    <h2>{{ product.title }}</h2>
+    <span class="product--category">{{ product.category }}</span>
+    <p class="product--price">{{ product.price | currency }}</p>
+
+    <div class="product--rate">
+      <app-star [rate]="product.rating.rate"></app-star>
+      <span>{{ product.rating.count }}</span>
+    </div>
+
+    <div class="info--bottom">
+      <app-quantity [(quantity)]="quantity"></app-quantity>
+      <app-button (click)="onClick(product)">
+        Add To Cart <mat-icon>shopping_cart</mat-icon>
+        <span class="item--number" *ngIf="numberOfItemInCart">{{
+          numberOfItemInCart > 99 ? "99+" : numberOfItemInCart
+        }}</span>
+      </app-button>
+    </div>
+  </div>
+  <p class="description">{{ product.description }}</p>
+</div>

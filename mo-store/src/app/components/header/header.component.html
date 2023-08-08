@@ -1,0 +1,12 @@
+<header class="header">
+  <a routerLink="/home" class="brand">
+    <span class="brand--special">MO</span>
+    Store
+  </a>
+
+  <div class="header--cart" [ngClass]="cartItemsNumber ? 'active' : ''">
+    <a routerLink="/cart" class="cart--link">Go To Cart</a>
+    <mat-icon class="cart--icon">shopping_cart</mat-icon>
+    <span class="cart--number">{{ cartItemsNumber }}</span>
+  </div>
+</header>

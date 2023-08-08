@@ -1,0 +1,23 @@
+.cart--btns {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart--total {
+  font-size: 1.5rem;
+  font-weight: 500;
+  width: fit-content;
+  margin: 2rem 1rem 2rem auto;
+}
+
+.cart--empty {
+  max-width: 20rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.empty--text {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 2.5rem 0;
+}

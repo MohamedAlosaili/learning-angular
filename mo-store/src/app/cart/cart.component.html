@@ -1,0 +1,17 @@
+<div>
+  <app-cart-item *ngFor="let item of items" [item]="item"></app-cart-item>
+
+  <div class="cart--empty" *ngIf="!items.length">
+    <p class="empty--text">Your cart is empty 🛒</p>
+    <app-button (click)="redirectToHome()">Continue shopping</app-button>
+  </div>
+
+  <p class="cart--total" *ngIf="items.length">
+    Total: {{ cartTotal | currency }}
+  </p>
+
+  <div class="cart--btns" *ngIf="items.length">
+    <app-button [alt]="true" (click)="clearCart()">Clear cart</app-button>
+    <app-button>Proceed to checkout</app-button>
+  </div>
+</div>

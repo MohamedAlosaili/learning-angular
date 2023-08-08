@@ -1,0 +1,9 @@
+<!--
+  Here We are using content projection to make this button reusable throughout the application
+
+  More on Angular docs: https://angular.io/guide/content-projection
+-->
+
+<button [ngClass]="[alt ? 'alt' : '', className]">
+  <ng-content></ng-content>
+</button>

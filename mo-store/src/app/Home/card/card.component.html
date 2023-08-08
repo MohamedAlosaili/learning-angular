@@ -1,0 +1,25 @@
+<div class="card">
+  <img
+    src="{{ product.image }}"
+    alt="{{ product.title }}"
+    class="card--image"
+  />
+
+  <div class="card--body">
+    <div class="body--top">
+      <span class="card--category">{{ product.category }}</span>
+      <span>{{ product.price | currency }}</span>
+    </div>
+    <h3 class="card--title">{{ product.title }}</h3>
+  </div>
+
+  <app-button class="card--btn" (click)="addToCart(product)">
+    Add To Cart
+    <mat-icon title="Add to cart">shopping_cart</mat-icon>
+    <span class="item--number" *ngIf="numberOfItemInCart">{{
+      numberOfItemInCart > 99 ? "99+" : numberOfItemInCart
+    }}</span>
+  </app-button>
+
+  <a [routerLink]="['/products', product.id]" class="card--link"></a>
+</div>

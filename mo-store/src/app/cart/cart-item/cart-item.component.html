@@ -1,0 +1,29 @@
+<div class="item">
+  <img
+    [src]="item.product.image"
+    [alt]="item.product.title"
+    class="item--img"
+  />
+  <h3 class="item--name">{{ item.product.title }}</h3>
+
+  <div>
+    <div class="item--box">
+      <p>Price: {{ item.product.price | currency }}</p>
+      <app-quantity
+        [(quantity)]="quantity"
+        [label]="false"
+        [start]="0"
+      ></app-quantity>
+    </div>
+
+    <div class="item--box">
+      <p class="item--total">Total: {{ total | currency }}</p>
+      <app-button
+        class="item--btn"
+        [alt]="true"
+        (click)="removeItem(item.product)"
+        >Remove Item</app-button
+      >
+    </div>
+  </div>
+</div>
