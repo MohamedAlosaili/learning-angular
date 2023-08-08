@@ -15,8 +15,26 @@ type Storage = 'localStorage' | 'sessionStorage';
  *
  */
 
-// TODO: ProvideIn should be fixed
-@Injectable({ providedIn: 'any' })
+/**
+ * Goal:
+ *  Make this service consistent (shared instance) in CartService because it uses the same configurations.
+ *  Also, having different instances of the service in each component used it.
+ *
+ * Solution:
+ *  - Add the service to the providers array in AppModule to be available to used as shared instance with "Carefulness"
+ *  - Any Component needs a different instance to change the configurations, should add the service to it's provider array to create a new instance
+ *
+ * This related to how Angular inject services in the components:
+ *  - It looks in the providers array in the @Component decorator
+ *  - If it doesn't find the service it looks to the root injector or providers array in the application module.
+ *
+ * Current Problem: When another service needs a different instance to change the configuration, it'll be conflict with other service uses the shared instance.
+ *
+ * To solve the problem there is way with useFactory to customize the creation of each service
+ *
+ */
+
+@Injectable()
 export class StorageService {
   private storage: Storage = 'localStorage';
 
