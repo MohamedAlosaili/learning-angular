@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../types';
 import { ActivatedRoute } from '@angular/router';
 import { CartService } from '../services/cart.service';
-import { Subscription } from 'rxjs';
 import { NumberOfItems } from '../base/NumberOfItems.component';
 
 @Component({
