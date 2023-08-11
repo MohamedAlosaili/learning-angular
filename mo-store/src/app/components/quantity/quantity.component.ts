@@ -16,6 +16,8 @@ export class QuantityComponent {
   /*
    * ✅ This implementation of Two-way binding
    */
+
+  // { required: true } is a feature of Angular v16. By default it's false
   @Input({ required: true }) quantity = 1;
   @Output() quantityChange = new EventEmitter<number>();
   @Input() label = true;
