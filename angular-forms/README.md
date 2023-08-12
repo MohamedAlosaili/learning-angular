@@ -1,5 +1,7 @@
 # AngularForms
 
+This project built with the guidance and help of [Angular Forms](https://app.pluralsight.com/library/courses/angular-forms) from [PluralSight](https://app.pluralsight.com/)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.8.
 
 ## Development server
