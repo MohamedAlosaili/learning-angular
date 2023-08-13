@@ -1,0 +1,9 @@
+/*
+  :not(form) prevent applying the style on the form
+  .ng-touched to apply this style only when the user blur out from the element
+
+*/
+.ng-invalid:not(form).ng-touched,
+.ng-submitted .ng-invalid:not(form) {
+  border: 1px solid red;
+}
