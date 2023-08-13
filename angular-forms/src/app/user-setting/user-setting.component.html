@@ -1,24 +1,76 @@
 <!--
   # Angular provide some classes to style forms based on form state like: ng-untouched ng-pristine ng-valid
+
+  # By importing FormsModule Angular has control of forms using ngForm on each form template in the application
+
+  # (#form='ngForm' + (ngModel on every element in the form) ==> form.value) works if you don't want to populate the form with values.
+    Here user settings form, usually we have user info that we want to populate the form with. in this case we want to use predefined model in component class
+    with [(ngModel)] to way data binding to populate and update user settings model and keep the view and the model in sync
  -->
 
 <div class="container">
   <h2>User Settings</h2>
-  <form class="d-flex flex-column gap-2 fw-medium">
+  <!-- Angular with FormsModule disabled Browser native validation by default, to enable them use ngNativeValidate directive -->
+  <form
+    class="d-flex flex-column gap-2 fw-medium"
+    #form="ngForm"
+    (ngSubmit)="onSubmit(form)"
+  >
+    <!-- #form="ngForm" -->
+    <!-- By setting form variable `#form="ngForm"` now we have access to form object -->
+
+    <!-- [ngModel] help in building form.value object and provide a property for each element in the form -->
     <div>
       <label for="name">Name:</label>
       <input
         type="text"
         name="name"
         id="name"
+        required
+        minlength="5"
+        maxlength="50"
+        (blur)="onBlur(name)"
+        [(ngModel)]="userSettings.name"
+        #name="ngModel"
         class="form-control"
         placeholder="You name"
       />
+      <!--
+        class="form-control border {{
+          name.dirty || name.touched
+            ? name.invalid
+              ? 'border-danger'
+              : 'border-success'
+            : ''
+        }}"
+       -->
+
+      <!--
+        See Angular validation CSS classes & validation properties: https://angular.io/guide/form-validation
+        There are many ways to show and give the user hints about the errors all of them leverage validation classes and properties.
+      -->
+      <div
+        class="alert alert-danger"
+        style="font-size: 0.75rem"
+        [hidden]="name.valid || (name.untouched && !form.submitted)"
+        role="alert"
+      >
+        <ng-container *ngIf="name.errors?.['required']"
+          >Name fields is required</ng-container
+        >
+        <ng-container *ngIf="name.errors?.['minlength']">
+          Name fields must be more than 5 characters
+        </ng-container>
+        <ng-container *ngIf="name.errors?.['maxlength']">
+          Name fields cannot be more than 50 characters
+        </ng-container>
+      </div>
     </div>
     <div class="form-check">
       <input
         class="form-check-input"
         type="checkbox"
+        [(ngModel)]="userSettings.emailOffer"
         name="emailOffer"
         id="emailOffer"
       />
@@ -27,63 +79,73 @@
       </label>
     </div>
 
-    <div>
-      <p>Prefer Theme:</p>
-      <div class="form-check">
-        <input
-          class="form-check-input"
-          type="radio"
-          name="theme"
-          id="theme-light"
-        />
-        <label class="form-check-label" for="theme-light"> Light </label>
+    <ng-container *ngIf="nameValid">
+      <div>
+        <p>Prefer Theme:</p>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="theme"
+            id="theme-light"
+            value="light"
+            [(ngModel)]="userSettings.theme"
+          />
+          <label class="form-check-label" for="theme-light"> Light </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="theme"
+            id="theme-dark"
+            value="dark"
+            [(ngModel)]="userSettings.theme"
+          />
+          <label class="form-check-label" for="theme-dark"> Dark </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="theme"
+            id="theme-system"
+            value="system"
+            checked
+            [(ngModel)]="userSettings.theme"
+          />
+          <label class="form-check-label" for="theme-system"> System </label>
+        </div>
       </div>
-      <div class="form-check">
-        <input
-          class="form-check-input"
-          type="radio"
-          name="theme"
-          id="theme-dark"
-        />
-        <label class="form-check-label" for="theme-dark"> Dark </label>
-      </div>
-      <div class="form-check">
-        <input
-          class="form-check-input"
-          type="radio"
-          name="theme"
-          id="theme-system"
-          checked
-        />
-        <label class="form-check-label" for="theme-system"> System </label>
-      </div>
-    </div>
 
-    <div>
-      <label for="country">Country</label>
-      <select
-        class="form-select"
-        id="country"
-        name="country"
-        aria-label="Country"
-      >
-        <option selected>Choose your country</option>
-        <option value="saudi arabia">Saudi Arabia</option>
-        <option value="bahrain">Bahrain</option>
-        <option value="kuwait">Kuwait</option>
-      </select>
-    </div>
+      <div>
+        <label for="country">Country</label>
+        <select
+          class="form-select"
+          id="country"
+          name="country"
+          aria-label="Country"
+          [(ngModel)]="userSettings.country"
+        >
+          <option selected value="">Choose your country</option>
+          <option value="saudi arabia">Saudi Arabia</option>
+          <option value="bahrain">Bahrain</option>
+          <option value="kuwait">Kuwait</option>
+        </select>
+      </div>
 
-    <div>
-      <label for="notes">Notes</label>
-      <textarea
-        class="form-control"
-        name="notes"
-        id="notes"
-        cols="30"
-        rows="3"
-      ></textarea>
-    </div>
+      <div>
+        <label for="notes">Notes</label>
+        <textarea
+          class="form-control"
+          name="notes"
+          id="notes"
+          cols="30"
+          rows="3"
+          [(ngModel)]="userSettings.notes"
+        ></textarea>
+      </div>
+    </ng-container>
 
     <button class="btn btn-primary fw-medium">Send</button>
   </form>
