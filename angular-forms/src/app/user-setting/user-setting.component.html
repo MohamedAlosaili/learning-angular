@@ -27,6 +27,7 @@
         name="name"
         id="name"
         required
+        [disabled]="loading"
         minlength="5"
         maxlength="50"
         (blur)="onBlur(name)"
@@ -50,7 +51,7 @@
         There are many ways to show and give the user hints about the errors all of them leverage validation classes and properties.
       -->
       <div
-        class="alert alert-danger"
+        class="text-danger"
         style="font-size: 0.75rem"
         [hidden]="name.valid || (name.untouched && !form.submitted)"
         role="alert"
@@ -69,6 +70,7 @@
     <div class="form-check">
       <input
         class="form-check-input"
+        [disabled]="loading"
         type="checkbox"
         [(ngModel)]="userSettings.emailOffer"
         name="emailOffer"
@@ -79,12 +81,13 @@
       </label>
     </div>
 
-    <ng-container *ngIf="nameValid">
+    <ng-container *ngIf="true">
       <div>
         <p>Prefer Theme:</p>
         <div class="form-check">
           <input
             class="form-check-input"
+            [disabled]="loading"
             type="radio"
             name="theme"
             id="theme-light"
@@ -96,6 +99,7 @@
         <div class="form-check">
           <input
             class="form-check-input"
+            [disabled]="loading"
             type="radio"
             name="theme"
             id="theme-dark"
@@ -107,6 +111,7 @@
         <div class="form-check">
           <input
             class="form-check-input"
+            [disabled]="loading"
             type="radio"
             name="theme"
             id="theme-system"
@@ -122,15 +127,16 @@
         <label for="country">Country</label>
         <select
           class="form-select"
+          [disabled]="loading"
           id="country"
           name="country"
           aria-label="Country"
           [(ngModel)]="userSettings.country"
         >
-          <option selected value="">Choose your country</option>
-          <option value="saudi arabia">Saudi Arabia</option>
-          <option value="bahrain">Bahrain</option>
-          <option value="kuwait">Kuwait</option>
+          <option selected>Choose your country</option>
+          <option *ngFor="let country of countries$ | async" [value]="country">
+            {{ country | titlecase }}
+          </option>
         </select>
       </div>
 
@@ -138,6 +144,7 @@
         <label for="notes">Notes</label>
         <textarea
           class="form-control"
+          [disabled]="loading"
           name="notes"
           id="notes"
           cols="30"
@@ -147,6 +154,19 @@
       </div>
     </ng-container>
 
-    <button class="btn btn-primary fw-medium">Send</button>
+    <button [disabled]="loading" class="btn btn-primary fw-medium">
+      {{ loading ? "Sending..." : "Send" }}
+    </button>
+    {{ !!submitErrorMessage }}
+    <p
+      *ngIf="(form.submitted && form.invalid) || submitErrorMessage"
+      class="text-danger text-center"
+    >
+      {{
+        submitErrorMessage
+          ? submitErrorMessage
+          : "Some fields have invalid values"
+      }}
+    </p>
   </form>
 </div>
