@@ -4,4 +4,5 @@ export interface UserSettings {
   theme: 'light' | 'dark' | 'system';
   country: string;
   notes: string;
+  birthday?: Date | string;
 }

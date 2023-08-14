@@ -19,6 +19,7 @@ export class UserSettingComponent {
   submitErrorMessage?: string;
   loading = false;
   countries$!: Observable<string[]>;
+  notifications = false;
 
   /**
    * Copying form data:
@@ -47,17 +48,20 @@ export class UserSettingComponent {
     console.log(`Form is ${form.valid ? 'valid' : 'invalid'}`);
     console.log(form.valid);
 
-    if (form.valid) {
-      this.loading = true;
-      this.postSub = this.data.postUserSettings(this.userSettings).subscribe({
-        next: (data) => {
-          this.loading = false;
-          console.log(data);
-          this.router.navigate(['/submitted']);
-        },
-        error: this.handleSubmitError.bind(this),
-      });
-    }
+    console.log(this.userSettings);
+    console.log(this.userSettings.birthday);
+
+    // if (form.valid) {
+    //   this.loading = true;
+    //   this.postSub = this.data.postUserSettings(this.userSettings).subscribe({
+    //     next: (data) => {
+    //       this.loading = false;
+    //       console.log(data);
+    //       this.router.navigate(['/submitted']);
+    //     },
+    //     error: this.handleSubmitError.bind(this),
+    //   });
+    // }
   }
 
   ngOnDestroy(): void {

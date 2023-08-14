@@ -83,46 +83,19 @@
 
     <ng-container *ngIf="true">
       <div>
-        <p>Prefer Theme:</p>
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            [disabled]="loading"
-            type="radio"
-            name="theme"
-            id="theme-light"
-            value="light"
-            [(ngModel)]="userSettings.theme"
-          />
-          <label class="form-check-label" for="theme-light"> Light </label>
+        <p class="mb-1">Prefer Theme:</p>
+        <div
+          class="btn-group mt-0"
+          btnRadioGroup
+          name="theme"
+          [(ngModel)]="userSettings.theme"
+        >
+          <label btnRadio="light" class="btn btn-primary">Light</label>
+          <label btnRadio="dark" class="btn btn-primary">Dark</label>
+          <label btnRadio="system" class="btn btn-primary">System</label>
         </div>
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            [disabled]="loading"
-            type="radio"
-            name="theme"
-            id="theme-dark"
-            value="dark"
-            [(ngModel)]="userSettings.theme"
-          />
-          <label class="form-check-label" for="theme-dark"> Dark </label>
-        </div>
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            [disabled]="loading"
-            type="radio"
-            name="theme"
-            id="theme-system"
-            value="system"
-            checked
-            [(ngModel)]="userSettings.theme"
-          />
-          <label class="form-check-label" for="theme-system"> System </label>
-        </div>
+        {{ userSettings.theme }}
       </div>
-
       <div>
         <label for="country">Country</label>
         <select
@@ -153,11 +126,34 @@
         ></textarea>
       </div>
     </ng-container>
+    <div class="d-flex align-items-center gap-2">
+      <button
+        type="button"
+        class="btn btn-primary"
+        name="notifications"
+        [(ngModel)]="notifications"
+        btnCheckbox
+      >
+        {{ notifications ? "Enable" : "Disable" }} Notifications
+      </button>
+    </div>
+
+    <div class="col-xs-12 col-12 col-md-4 form-group mb-3">
+      <label for="notes">Birthday</label>
+      <input
+        type="text"
+        placeholder="Birthday"
+        class="form-control"
+        name="birthday"
+        [(ngModel)]="userSettings.birthday"
+        bsDatepicker
+        [bsConfig]="{ adaptivePosition: true }"
+      />
+    </div>
 
     <button [disabled]="loading" class="btn btn-primary fw-medium">
       {{ loading ? "Sending..." : "Send" }}
     </button>
-    {{ !!submitErrorMessage }}
     <p
       *ngIf="(form.submitted && form.invalid) || submitErrorMessage"
       class="text-danger text-center"

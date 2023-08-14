@@ -7,6 +7,9 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { UserSettingComponent } from './user-setting/user-setting.component';
 import { SubmittedComponent } from './submitted/submitted.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 const routes: Routes = [
   {
@@ -30,6 +33,9 @@ const routes: Routes = [
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
+    BrowserAnimationsModule,
+    ButtonsModule.forRoot(),
+    BsDatepickerModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],
